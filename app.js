@@ -8,6 +8,14 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/about", async (_req, res) => {
+    const numPostsTotal = await countPosts();
+
+    res.render("about", { numPosts: numPostsTotal });
+});
+
+app.get("/third", (_req, res) => res.render("third"));
+
 app.get("/", async (_req, res) => {
     const numPostsToShow = 10;
     const posts = await getLastPosts(numPostsToShow);
