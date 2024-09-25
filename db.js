@@ -4,6 +4,12 @@ const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
 const db = client.db("db");
 
+/** Insert a post into the database. A post should be of the following form:
+ *  {
+ *      sender: string,
+ *      content: string,
+ *  }
+ */
 const insertPost = async (post) => {
     try {
         const collection = db.collection("posts");
@@ -18,6 +24,7 @@ const insertPost = async (post) => {
     }
 };
 
+/** Get the latest numPosts posts from the database. */
 const getLastPosts = async (numPosts) => {
     try {
         const collection = db.collection("posts");
@@ -33,6 +40,7 @@ const getLastPosts = async (numPosts) => {
     }
 };
 
+/** Count the total number of posts in the database. */
 const countPosts = async () => {
     try {
         const collection = db.collection("posts");
