@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>message board</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
+    <body>
+        <h1>message board</h1>
+        <div id="main">
+            <form method="post">
+                <input type="text" name="sender" placeholder="name" required>
+                <input type="text" name="content" placeholder="message" required>
+                <button type="submit">post</button>
+            </form>
+            <% for (var i = 0; i < posts.length; i++) { %>
+                <p class="post"><span class="sender"><%= posts[i].sender %></span>: <%= posts[i].content %></p>
+            <% } %>
+        </div>
+    </body>
+</html>

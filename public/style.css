@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap");
+
+h1,
+p,
+input,
+button {
+    font-family: "Noto Serif", serif;
+}
+
+p {
+    font-size: 13px;
+}
+
+p.post {
+    border-top: 1px solid #ccc;
+}
+
+input,
+button {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input {
+    width: 75%;
+    padding-left: 10px;
+}
+
+button {
+    border-color: #000;
+    width: 20%;
+}
+
+div#main {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span.sender {
+    font-weight: bold;
+}
