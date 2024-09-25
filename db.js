@@ -33,5 +33,19 @@ const getLastPosts = async (numPosts) => {
     }
 };
 
+const countPosts = async () => {
+    try {
+        const collection = db.collection("posts");
+        const numPosts = await collection.countDocuments();
+
+        return numPosts;
+    } catch (e) {
+        console.error(e);
+
+        throw e;
+    }
+};
+
 module.exports.insertPost = insertPost;
 module.exports.getLastPosts = getLastPosts;
+module.exports.countPosts = countPosts;

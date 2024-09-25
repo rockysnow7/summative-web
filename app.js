@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { insertPost, getLastPosts } = require("./db");
+const { insertPost, getLastPosts, countPosts } = require("./db");
 
 const app = express();
 
@@ -9,9 +9,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", async (_req, res) => {
-    const posts = await getLastPosts(10);
+    const numPostsToShow = 10;
+    const posts = await getLastPosts(numPostsToShow);
+    const numPostsTotal = await countPosts();
 
-    res.render("index", { posts: posts });
+    res.render("index", {
+        posts: posts,
+        numPosts: numPostsTotal - numPostsToShow,
+    });
 });
 
 app.post("/", async (req, res) => {
