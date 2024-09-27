@@ -23,7 +23,7 @@ app.get("/", async (_req, res) => {
 
     res.render("index", {
         posts: posts,
-        numPosts: numPostsTotal - numPostsToShow,
+        numPosts: Math.max(0, numPostsTotal - numPostsToShow),
     });
 });
 
