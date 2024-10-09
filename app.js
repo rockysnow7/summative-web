@@ -14,25 +14,27 @@ app.get("/about", async (_req, res) => {
     res.render("about", { numPosts: numPostsTotal });
 });
 
-app.get("/most-liked", async (_req, res) => {
-    const numPostsToShow = 10;
+app.get("/most-liked", async (req, res) => {
+    const numPostsToShow = parseInt(req.query.limit) || 10;
     const posts = await getMostLikedPosts(numPostsToShow);
     const numPostsTotal = await countPosts();
 
     res.render("most-liked", {
         posts: posts,
         numPosts: Math.max(0, numPostsTotal - numPostsToShow),
+        currentLimit: numPostsToShow,
     });
 });
 
-app.get("/", async (_req, res) => {
-    const numPostsToShow = 10;
+app.get("/", async (req, res) => {
+    const numPostsToShow = parseInt(req.query.limit) || 10;
     const posts = await getLastPosts(numPostsToShow);
     const numPostsTotal = await countPosts();
 
     res.render("index", {
         posts: posts,
         numPosts: Math.max(0, numPostsTotal - numPostsToShow),
+        currentLimit: numPostsToShow,
     });
 });
 

@@ -18,7 +18,9 @@
                     <p class="likes">(<%= posts[i].likes %> likes)</p>
                 </div>
             <% } %>
-            <p>(...<%= numPosts %> more posts.)</p>
+            <% if (numPosts > 0) { %>
+                <p>(<a href="/most-liked?limit=<%= currentLimit + 10 %>">...<%=numPosts%> more posts</a>)</p>
+            <% } %>
         </div>
     </body>
 </html>
