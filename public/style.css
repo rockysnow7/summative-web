@@ -94,3 +94,7 @@ div#main {
 span.sender {
     font-weight: bold;
 }
+
+img#cat {
+    width: 100%;
+}
