@@ -47,6 +47,7 @@ div.post {
 div.post p.likes {
     font-style: italic;
     margin-left: auto;
+    padding-left: 10px;
 }
 
 div.post button.like {
