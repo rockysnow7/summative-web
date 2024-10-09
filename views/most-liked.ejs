@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>message board | most liked</title>
+        <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
+    <body>
+        <h1>message board</h1>
+        <div id="nav">
+            <h2><a href="/">messages</a></h2>
+            <h2><a href="/about">about</a></h2>
+            <h2><a class="current" href="/most-liked">most liked</a></h2>
+        </div>
+        <div id="main">
+            <h2>most liked</h2>
+            <% for (var i = 0; i < posts.length; i++) { %>
+                <div class="post">
+                    <p class="message"><span class="sender"><%= posts[i].sender %></span>: <%= posts[i].content %></p>
+                    <p class="likes">(<%= posts[i].likes %> likes)</p>
+                </div>
+            <% } %>
+            <p>(...<%= numPosts %> more posts.)</p>
+        </div>
+    </body>
+</html>

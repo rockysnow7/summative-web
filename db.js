@@ -65,6 +65,22 @@ const getLastPosts = async (numPosts) => {
     }
 };
 
+/** Get the most liked posts from the database. */
+const getMostLikedPosts = async (numPosts) => {
+    try {
+        const collection = db.collection("posts");
+        const cursor = collection.find().sort({ likes: -1 }).limit(numPosts);
+        const posts = await cursor.toArray();
+        console.log(`Found ${posts.length} posts: ${JSON.stringify(posts)}}`);
+
+        return posts;
+    } catch (e) {
+        console.error(e);
+
+        throw e;
+    }
+};
+
 /** Count the total number of posts in the database. */
 const countPosts = async () => {
     try {
@@ -82,4 +98,5 @@ const countPosts = async () => {
 module.exports.insertPost = insertPost;
 module.exports.likePost = likePost;
 module.exports.getLastPosts = getLastPosts;
+module.exports.getMostLikedPosts = getMostLikedPosts;
 module.exports.countPosts = countPosts;

@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { insertPost, likePost, getLastPosts, countPosts } = require("./db");
+const { insertPost, likePost, getLastPosts, getMostLikedPosts, countPosts } = require("./db");
 
 const app = express();
 
@@ -14,7 +14,16 @@ app.get("/about", async (_req, res) => {
     res.render("about", { numPosts: numPostsTotal });
 });
 
-app.get("/third", (_req, res) => res.render("third"));
+app.get("/most-liked", async (_req, res) => {
+    const numPostsToShow = 10;
+    const posts = await getMostLikedPosts(numPostsToShow);
+    const numPostsTotal = await countPosts();
+
+    res.render("most-liked", {
+        posts: posts,
+        numPosts: Math.max(0, numPostsTotal - numPostsToShow),
+    });
+});
 
 app.get("/", async (_req, res) => {
     const numPostsToShow = 10;
