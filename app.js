@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { insertPost, getLastPosts, countPosts } = require("./db");
+const { insertPost, likePost, getLastPosts, countPosts } = require("./db");
 
 const app = express();
 
@@ -27,9 +27,15 @@ app.get("/", async (_req, res) => {
     });
 });
 
-app.post("/", async (req, res) => {
+app.post("/add-post", async (req, res) => {
     console.log(req.body);
     await insertPost(req.body);
+
+    res.redirect("/");
+});
+
+app.post("/like-post/:id", async (req, res) => {
+    await likePost(req.params.id);
 
     res.redirect("/");
 });

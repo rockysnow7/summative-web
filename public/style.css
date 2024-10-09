@@ -39,8 +39,30 @@ p {
     font-size: 13px;
 }
 
-p.post {
+div.post {
+    display: flex;
     border-top: 1px solid #ccc;
+}
+
+div.post p.likes {
+    font-style: italic;
+    margin-left: auto;
+}
+
+div.post button.like {
+    width: 20px;
+    margin-left: 10px;
+    margin-top: 0.5em;
+    background-color: transparent;
+    border: none;
+}
+
+div.post button.like img {
+    width: inherit;
+}
+
+div.post button.like img:hover {
+    cursor: pointer;
 }
 
 input,

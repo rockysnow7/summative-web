@@ -12,13 +12,19 @@
         </div>
         <div id="main">
             <h2>messages</h2>
-            <form method="post">
+            <form action="add-post" method="post">
                 <input type="text" name="sender" placeholder="name" required>
                 <input type="text" name="content" placeholder="message" required>
-                <button type="submit">post</button>
+                <button>post</button>
             </form>
             <% for (var i = 0; i < posts.length; i++) { %>
-                <p class="post"><span class="sender"><%= posts[i].sender %></span>: <%= posts[i].content %></p>
+                <div class="post">
+                    <p class="message"><span class="sender"><%= posts[i].sender %></span>: <%= posts[i].content %></p>
+                    <p class="likes">(<%= posts[i].likes %> likes)</p>
+                    <form action="like-post/<%= posts[i]._id %>" method="post" class="like">
+                        <button class="like"><img src="/like.png"></button>
+                    </form>
+                </div>
             <% } %>
             <p>(...<%= numPosts %> more posts.)</p>
         </div>

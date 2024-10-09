@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri);
@@ -11,10 +11,35 @@ const db = client.db("db");
  *  }
  */
 const insertPost = async (post) => {
+    const postData = {
+        sender: post.sender,
+        content: post.content,
+        likes: 0,
+    };
+
     try {
         const collection = db.collection("posts");
-        const result = await collection.insertOne(post);
+        const result = await collection.insertOne(postData);
         console.log(`Inserted post with the id ${result.insertedId}`);
+
+        return result;
+    } catch (e) {
+        console.error(e);
+
+        throw e;
+    }
+};
+
+/** Like a post in the database. */
+const likePost = async (id) => {
+    try {
+        const collection = db.collection("posts");
+        const result = await collection.updateOne(
+            { _id: new ObjectId(id) },
+            { $inc: { likes: 1 } },
+        );
+        console.log(`Liked post with the id ${id}`);
+        console.log(result);
 
         return result;
     } catch (e) {
@@ -30,7 +55,7 @@ const getLastPosts = async (numPosts) => {
         const collection = db.collection("posts");
         const cursor = collection.find().sort({ _id: -1 }).limit(numPosts);
         const posts = await cursor.toArray();
-        console.log(`Found ${posts.length} posts`);
+        console.log(`Found ${posts.length} posts: ${JSON.stringify(posts)}}`);
 
         return posts;
     } catch (e) {
@@ -55,5 +80,6 @@ const countPosts = async () => {
 };
 
 module.exports.insertPost = insertPost;
+module.exports.likePost = likePost;
 module.exports.getLastPosts = getLastPosts;
 module.exports.countPosts = countPosts;
