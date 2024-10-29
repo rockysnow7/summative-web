@@ -39,7 +39,6 @@ const likePost = async (id) => {
             { $inc: { likes: 1 } },
         );
         console.log(`Liked post with the id ${id}`);
-        console.log(result);
 
         return result;
     } catch (e) {
@@ -55,7 +54,7 @@ const getLastPosts = async (numPosts) => {
         const collection = db.collection("posts");
         const cursor = collection.find().sort({ _id: -1 }).limit(numPosts);
         const posts = await cursor.toArray();
-        console.log(`Found ${posts.length} posts: ${JSON.stringify(posts)}}`);
+        console.log(`Found ${posts.length} posts.`);
 
         return posts;
     } catch (e) {
@@ -71,7 +70,7 @@ const getMostLikedPosts = async (numPosts) => {
         const collection = db.collection("posts");
         const cursor = collection.find().sort({ likes: -1 }).limit(numPosts);
         const posts = await cursor.toArray();
-        console.log(`Found ${posts.length} posts: ${JSON.stringify(posts)}}`);
+        console.log(`Found ${posts.length} posts.`);
 
         return posts;
     } catch (e) {

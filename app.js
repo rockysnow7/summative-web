@@ -49,7 +49,7 @@ app.post("/add-post", async (req, res) => {
 });
 
 app.post("/like-post/:id", async (req, res) => {
-    await likePost(req.params.id);
+    await likePost(`Liked post with id ${req.params.id}`);
 
     res.redirect("/");
 });
