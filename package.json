@@ -9,8 +9,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "debug": "^4.3.7",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
-    "mongodb": "^6.9.0"
+    "mongodb": "^6.9.0",
+    "morgan": "^1.10.0"
   }
 }
